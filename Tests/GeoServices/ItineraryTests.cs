@@ -14,7 +14,7 @@ public class ItineraryTests
         var firstCoordinates =
             $"{coordinates.features[0].geometry.coordinates[0].ToString(CultureInfo.InvariantCulture)},{coordinates.features[0].geometry.coordinates[1].ToString(CultureInfo.InvariantCulture)}";
 
-        coordinates = geoLocalizationService.GeoLocalizeAsync("Soisy").WaitAsync(CancellationToken.None).Result;
+        coordinates = geoLocalizationService.GeoLocalizeAsync("Versailles").WaitAsync(CancellationToken.None).Result;
         var secondCoordinates =
             $"{coordinates.features[0].geometry.coordinates[0].ToString(CultureInfo.InvariantCulture)},{coordinates.features[0].geometry.coordinates[1].ToString(CultureInfo.InvariantCulture)}";
 
@@ -22,8 +22,8 @@ public class ItineraryTests
             .WaitAsync(CancellationToken.None).Result;
 
         Assert.Equal("meter", result.distanceUnit);
-        Assert.Equal(50601.90000000000, result.distance, 1);
-        Assert.Equal(38.3117, result.duration, 4);
+        Assert.Equal(33028.7, result.distance, 1);
+        Assert.Equal(30.4467, result.duration, 4);
         Assert.Equal("minute", result.timeUnit);
 
 
