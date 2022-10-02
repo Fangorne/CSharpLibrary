@@ -1,0 +1,53 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32630.192
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LockProvider", "LockProvider\LockProvider.csproj", "{BAD8C61B-F642-445E-AC88-9A7E36E2BD00}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A5081F56-7F29-417C-8C41-CE940BB70172}"
+	ProjectSection(SolutionItems) = preProject
+		Readme.MD = Readme.MD
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PasswordGenerator", "PasswordGenerator\PasswordGenerator.csproj", "{42858AA5-29E4-406C-9CF5-54082C98C8F0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeoServices", "GeoServices\GeoServices.csproj", "{3F6898F6-93B1-4ABE-8F22-8663F0F20778}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{0B5C31D5-6FAC-46FD-A43D-D959A2FFF5B0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeoServices.Tests", "ClassLibrary1\GeoServices.Tests.csproj", "{5411597E-1FA2-4C72-9639-2AFF943230D8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BAD8C61B-F642-445E-AC88-9A7E36E2BD00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BAD8C61B-F642-445E-AC88-9A7E36E2BD00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BAD8C61B-F642-445E-AC88-9A7E36E2BD00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BAD8C61B-F642-445E-AC88-9A7E36E2BD00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42858AA5-29E4-406C-9CF5-54082C98C8F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42858AA5-29E4-406C-9CF5-54082C98C8F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42858AA5-29E4-406C-9CF5-54082C98C8F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42858AA5-29E4-406C-9CF5-54082C98C8F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F6898F6-93B1-4ABE-8F22-8663F0F20778}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F6898F6-93B1-4ABE-8F22-8663F0F20778}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F6898F6-93B1-4ABE-8F22-8663F0F20778}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F6898F6-93B1-4ABE-8F22-8663F0F20778}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5411597E-1FA2-4C72-9639-2AFF943230D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5411597E-1FA2-4C72-9639-2AFF943230D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5411597E-1FA2-4C72-9639-2AFF943230D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5411597E-1FA2-4C72-9639-2AFF943230D8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5411597E-1FA2-4C72-9639-2AFF943230D8} = {0B5C31D5-6FAC-46FD-A43D-D959A2FFF5B0}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6AFF4A52-3158-47B6-8255-29B460A26709}
+	EndGlobalSection
+EndGlobal
