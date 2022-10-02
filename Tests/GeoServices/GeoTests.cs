@@ -1,22 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Globalization;
-using Xunit;
+﻿using Xunit;
 
-namespace GeoServices
+namespace GeoServices;
+
+public class GeoTests
 {
-    public class GeoTests
+    [Fact]
+    public void LocalizationTests()
     {
-        [Fact]
-        public async Task Way()
-        {
-            GeoLocalization geoLocalization = new GeoLocalization();
+        var geoLocalizationService = new GeoLocalizationService();
 
-            var coordinates = geoLocalization.GeoLocalizeAsync("Yerres").WaitAsync(CancellationToken.None).Result;
-            coordinates = geoLocalization.GeoLocalizeAsync("Soisy").WaitAsync(CancellationToken.None).Result;
-            Assert.Equal(2.30165, coordinates.features[0].geometry.coordinates[0], 5);
-            Assert.Equal(48.98868, coordinates.features[0].geometry.coordinates[1], 5);
-        }
+        var coordinates = geoLocalizationService.GeoLocalizeAsync("Yerres").WaitAsync(CancellationToken.None).Result;
+        coordinates = geoLocalizationService.GeoLocalizeAsync("Soisy").WaitAsync(CancellationToken.None).Result;
+        Assert.Equal(2.30165, coordinates.features[0].geometry.coordinates[0], 5);
+        Assert.Equal(48.98868, coordinates.features[0].geometry.coordinates[1], 5);
     }
 }

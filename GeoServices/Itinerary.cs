@@ -1,51 +1,75 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web;
-using Newtonsoft.Json;
+﻿namespace GeoServices;
 
-namespace GeoServices
+public class Itinerary
 {
-    public class Itinerary
+    public string resource { get; set; }
+    public string resourceVersion { get; set; }
+    public string start { get; set; }
+    public string end { get; set; }
+    public string profile { get; set; }
+    public string optimization { get; set; }
+    public Geometry geometry { get; set; }
+    public string crs { get; set; }
+    public string distanceUnit { get; set; }
+    public string timeUnit { get; set; }
+    public List<double> bbox { get; set; }
+    public double distance { get; set; }
+    public double duration { get; set; }
+    public List<object> constraints { get; set; }
+    public List<Portion> portions { get; set; }
+}
+
+
+public class Attributes
+{
+    public Name name { get; set; }
+}
+
+public class Geometry
+{
+    public List<List<double>> coordinates { get; set; }
+    public string type { get; set; }
+}
+
+public class Instruction
+{
+    public string type { get; set; }
+    public string modifier { get; set; }
+
+    public override string ToString()
     {
-        public async Task<Root?> ComputeItinerary(string firstCoordinates, string secondCoordinates)
-        {
-            // Create a new product
-            Carto product = new Carto
-            {
-                resource = "bdtopo-osrm",
-                start = firstCoordinates,
-                end = secondCoordinates,
-                profile = "car",
-                optimization = "fastest",
-                distanceUnit = "meter",
-                timeUnit = "minute"
-            };
-            var json = JsonConvert.SerializeObject(product);
-            // In production code, don't destroy the HttpClient through using, but better use IHttpClientFactory factory or at least reuse an existing HttpClient instance
-            // https://docs.microsoft.com/en-us/aspnet/core/fundamentals/http-requests
-            // https://www.aspnetmonsters.com/2016/08/2016-08-27-httpclientwrong/
-            using (var httpClient = new HttpClient())
-            {
-                using (var request = new HttpRequestMessage(new HttpMethod("POST"), "https://wxs.ign.fr/calcul/geoportail/itineraire/rest/1.0.0/route"))
-                {
-                    request.Headers.TryAddWithoutValidation("accept", "application/json");
-
-                    request.Content = new StringContent(json);
-                    request.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json");
-
-                    var response = await httpClient.SendAsync(request);
-
-                    var responseInJson = await response.Content.ReadAsStringAsync();
-
-                    var root = JsonConvert.DeserializeObject<Root>(responseInJson);
-
-                    return root;
-                }
-            }
-        }
+        return $"{nameof(type)}: {type}, {nameof(modifier)}: {modifier}";
     }
+}
+
+public class Name
+{
+    public string nom_1_gauche { get; set; }
+    public string nom_1_droite { get; set; }
+    public string cpx_numero { get; set; }
+    public string cpx_toponyme { get; set; }
+
+    public override string ToString()
+    {
+        return $"{nameof(nom_1_gauche)}: {nom_1_gauche}, {nameof(nom_1_droite)}: {nom_1_droite}, {nameof(cpx_numero)}: {cpx_numero}, {nameof(cpx_toponyme)}: {cpx_toponyme}";
+    }
+}
+
+public class Portion
+{
+    public string start { get; set; }
+    public string end { get; set; }
+    public double distance { get; set; }
+    public double duration { get; set; }
+    public List<double> bbox { get; set; }
+    public List<Step> steps { get; set; }
+}
+
+public class Step
+{
+    public Geometry geometry { get; set; }
+    public Attributes attributes { get; set; }
+    public double distance { get; set; }
+    public double duration { get; set; }
+    public Instruction instruction { get; set; }
 }
