@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GeoServices\GeoServices.csproj" />
+    <ProjectReference Include="..\..\GeoServices\GeoServices.csproj" />
   </ItemGroup>
 
 </Project>
