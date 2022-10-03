@@ -1,5 +1,4 @@
-﻿namespace GeoServices;
-
+﻿namespace GeoServices.Model;
 public class ItineraryRequest
 {
     public string resource { get; set; } = "bdtopo-osrm"; // bdtopo-pgr but removes getSteps

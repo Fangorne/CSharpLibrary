@@ -1,4 +1,4 @@
-﻿namespace GeoServices;
+﻿namespace GeoServices.Model;
 
 public class Feature
 {
