@@ -1,4 +1,6 @@
-﻿using System.Net.Http.Headers;
+﻿using System.Globalization;
+using System.Net.Http.Headers;
+using GeoCoordinatePortable;
 using GeoServices.Model;
 using Newtonsoft.Json;
 
@@ -6,24 +8,25 @@ namespace GeoServices;
 
 public class ItineraryService
 {
-    public async Task<Itinerary?> ComputeItinerary(string firstCoordinates, string secondCoordinates)
+    public async Task<Itinerary?> ComputeItinerary(GeoCoordinate firstCoordinates, GeoCoordinate secondCoordinates)
     {
+        if (firstCoordinates == null) throw new ArgumentNullException(nameof(firstCoordinates));
+        if (secondCoordinates == null) throw new ArgumentNullException(nameof(secondCoordinates));
+
         // Create a new product
         var product = new ItineraryRequest
         {
             resource = "bdtopo-osrm",
-            start = firstCoordinates,
-            end = secondCoordinates,
+            start = $"{firstCoordinates.Latitude.ToString(CultureInfo.InvariantCulture)},{firstCoordinates.Longitude.ToString(CultureInfo.InvariantCulture)}",
+            end = $"{secondCoordinates.Latitude.ToString(CultureInfo.InvariantCulture)},{firstCoordinates.Longitude.ToString(CultureInfo.InvariantCulture)}",
             profile = "car",
             optimization = "fastest",
             distanceUnit = "meter",
             timeUnit = "minute"
         };
         var json = JsonConvert.SerializeObject(product);
-        // In production code, don't destroy the HttpClient through using, but better use IHttpClientFactory factory or at least reuse an existing HttpClient instance
-        // https://docs.microsoft.com/en-us/aspnet/core/fundamentals/http-requests
-        // https://www.aspnetmonsters.com/2016/08/2016-08-27-httpclientwrong/
-        using (var httpClient = new HttpClient())
+        using var httpSocketHandler = new SocketsHttpHandler();
+        using (var httpClient = new HttpClient(httpSocketHandler))
         {
             using (var request = new HttpRequestMessage(new HttpMethod("POST"),
                        "https://wxs.ign.fr/calcul/geoportail/itineraire/rest/1.0.0/route"))

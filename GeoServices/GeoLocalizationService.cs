@@ -1,11 +1,22 @@
 ﻿using System.Web;
 using GeoServices.Model;
 using Newtonsoft.Json;
+using GeoCoordinatePortable;
 
 namespace GeoServices;
 
 public class GeoLocalizationService
 {
+    public IEnumerable<GeoCoordinate?> GeoAddressToGeoCoordinate(GeoAddress geoAddress)
+    {
+        if (geoAddress == null) throw new ArgumentNullException(nameof(geoAddress));
+
+        foreach (var geoAddressFeature in geoAddress.features)
+        {
+            yield return new GeoCoordinate(geoAddressFeature.geometry.coordinates[0], geoAddressFeature.geometry.coordinates[1]);
+        }
+    }
+
     public GeoAddress? GeoLocalize(string address)
     {
         return GeoLocalizeAsync(address).WaitAsync(CancellationToken.None).Result;
@@ -13,10 +24,8 @@ public class GeoLocalizationService
 
     public async Task<GeoAddress?> GeoLocalizeAsync(string address)
     {
-        // In production code, don't destroy the HttpClient through using, but better use IHttpClientFactory factory or at least reuse an existing HttpClient instance
-        // https://docs.microsoft.com/en-us/aspnet/core/fundamentals/http-requests
-        // https://www.aspnetmonsters.com/2016/08/2016-08-27-httpclientwrong/
-        using var httpClient = new HttpClient();
+        using var httpSocketHandler = new SocketsHttpHandler();
+        using var httpClient = new HttpClient(httpSocketHandler);
         var addressEncoded = HttpUtility.UrlEncode(address);
         using (var request = new HttpRequestMessage(new HttpMethod("GET"),
                    $"https://api-adresse.data.gouv.fr/search/?q={addressEncoded}&limit=1"))

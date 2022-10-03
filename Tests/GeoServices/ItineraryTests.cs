@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System.Diagnostics;
+using System.Globalization;
 using Xunit;
 
 namespace GeoServices.Tests;
@@ -10,28 +11,28 @@ public class ItineraryTests
     {
         var geoLocalizationService = new GeoLocalizationService();
         var itineraryService = new ItineraryService();
-        var coordinates = geoLocalizationService.GeoLocalizeAsync("Yerres").WaitAsync(CancellationToken.None).Result;
-        var firstCoordinates =
-            $"{coordinates.features[0].geometry.coordinates[0].ToString(CultureInfo.InvariantCulture)},{coordinates.features[0].geometry.coordinates[1].ToString(CultureInfo.InvariantCulture)}";
+        var firstCoordinates = geoLocalizationService.GeoLocalizeAsync("Yerres").WaitAsync(CancellationToken.None).Result;
+        var secondCoordinates = geoLocalizationService.GeoLocalizeAsync("Versailles").WaitAsync(CancellationToken.None).Result;
 
-        coordinates = geoLocalizationService.GeoLocalizeAsync("Versailles").WaitAsync(CancellationToken.None).Result;
-        var secondCoordinates =
-            $"{coordinates.features[0].geometry.coordinates[0].ToString(CultureInfo.InvariantCulture)},{coordinates.features[0].geometry.coordinates[1].ToString(CultureInfo.InvariantCulture)}";
+        Assert.NotNull(firstCoordinates);
+        Assert.NotNull(secondCoordinates);
+        var firstGeoCoordinate = geoLocalizationService.GeoAddressToGeoCoordinate(firstCoordinates).ToList();
+        var secondGeoCoordinate = geoLocalizationService.GeoAddressToGeoCoordinate(secondCoordinates).ToList();
 
-        var result = itineraryService.ComputeItinerary(firstCoordinates, secondCoordinates)
+        Assert.NotNull(firstGeoCoordinate);
+        Assert.NotNull(secondGeoCoordinate);
+        Assert.NotEmpty(firstGeoCoordinate);
+        Assert.NotEmpty(secondGeoCoordinate);
+
+        var result = itineraryService.ComputeItinerary(
+                firstGeoCoordinate.First(),
+                secondGeoCoordinate.First())
             .WaitAsync(CancellationToken.None).Result;
 
+        Assert.NotNull(result);
         Assert.Equal("meter", result.distanceUnit);
-        Assert.Equal(33028.7, result.distance, 1);
-        Assert.Equal(30.4467, result.duration, 4);
+        Assert.Equal(37085.4, result.distance, 1);
+        Assert.Equal(34.47, result.duration, 2);
         Assert.Equal("minute", result.timeUnit);
-
-
-        //MyLogger.Information($"Distance {root.distance} {root.distanceUnit} Durée {root.duration} {root.timeUnit}");
-
-        //foreach (var step in root.portions[0].steps)
-        //{
-        //    MyLogger.Information($"{step.instruction} {step.attributes.name} Distance : {step.distance} Durée : {step.duration}");
-        //}
     }
 }

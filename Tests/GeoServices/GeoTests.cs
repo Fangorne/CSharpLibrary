@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using GeoCoordinatePortable;
+using Xunit;
 
 namespace GeoServices;
 
@@ -18,5 +19,18 @@ public class GeoTests
         Assert.NotNull(coordinates);
         Assert.Equal(2.13132, coordinates.features[0].geometry.coordinates[0], 5);
         Assert.Equal(48.80302, coordinates.features[0].geometry.coordinates[1], 5);
+    }
+
+    [Fact]
+    public void GeoLocalizationServiceTests()
+    {
+        var geoLocalizationService = new GeoLocalizationService();
+        var coordinates = geoLocalizationService.GeoLocalizeAsync("Yerres").WaitAsync(CancellationToken.None).Result;
+        Assert.NotNull(coordinates);
+
+        var geoCoordinate = geoLocalizationService.GeoAddressToGeoCoordinate(coordinates);
+        Assert.NotNull(geoCoordinate);
+        Assert.Equal(2.49134, geoCoordinate.FirstOrDefault().Latitude, 5);
+        Assert.Equal(48.71088, geoCoordinate.FirstOrDefault().Longitude, 5);
     }
 }
