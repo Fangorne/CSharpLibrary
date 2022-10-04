@@ -6,4 +6,8 @@ A lightweight C# class that can be used to selectively lock objects, resources o
 
 ## PasswordGenerator
 
-A simple C# helper class for ASP.NET Core to generate a random password with custom strength requirements: min length, uppercase, lowercase, digits &amp; more
+A simple C# helper class for ASP.NET Core to generate a random password with custom strength requirements: min length, uppercase, lowercase, digits
+
+## GeoServices
+
+A simple C# wrapper for french geo localization services
