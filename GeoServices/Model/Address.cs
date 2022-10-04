@@ -19,6 +19,13 @@ public class Properties
     public double score { get; set; }
     public string housenumber { get; set; }
     public string id { get; set; }
+    /// <summary>
+    /// Type Of Result
+    /// housenumber
+    /// street
+    /// locality
+    /// municipality
+    /// </summary>
     public string type { get; set; }
     public string name { get; set; }
     public string postcode { get; set; }

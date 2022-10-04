@@ -18,6 +18,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{0B5C31D5
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeoServices.Tests", "Tests\GeoServices\GeoServices.Tests.csproj", "{2256A3A4-D654-40CF-843D-3F0C57BE63B2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Threading", "Threading\Threading.csproj", "{4AA7315E-7C2B-45DE-B7B2-97FC26F8E2DB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,6 +42,10 @@ Global
 		{2256A3A4-D654-40CF-843D-3F0C57BE63B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2256A3A4-D654-40CF-843D-3F0C57BE63B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2256A3A4-D654-40CF-843D-3F0C57BE63B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4AA7315E-7C2B-45DE-B7B2-97FC26F8E2DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4AA7315E-7C2B-45DE-B7B2-97FC26F8E2DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4AA7315E-7C2B-45DE-B7B2-97FC26F8E2DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4AA7315E-7C2B-45DE-B7B2-97FC26F8E2DB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -17,18 +17,18 @@ public class GeoLocalizationService
         }
     }
 
-    public GeoAddress? GeoLocalize(string address)
+    public GeoAddress? GeoLocalize(string address, int maxAddress = 1, bool autoCompletion = true)
     {
-        return GeoLocalizeAsync(address).WaitAsync(CancellationToken.None).Result;
+        return GeoLocalizeAsync(address, maxAddress, autoCompletion).WaitAsync(CancellationToken.None).Result;
     }
 
-    public async Task<GeoAddress?> GeoLocalizeAsync(string address)
+    public async Task<GeoAddress?> GeoLocalizeAsync(string address, int maxAddress = 1, bool autoCompletion = true)
     {
         using var httpSocketHandler = new SocketsHttpHandler();
         using var httpClient = new HttpClient(httpSocketHandler);
         var addressEncoded = HttpUtility.UrlEncode(address);
         using (var request = new HttpRequestMessage(new HttpMethod("GET"),
-                   $"https://api-adresse.data.gouv.fr/search/?q={addressEncoded}&limit=1"))
+                   $"https://api-adresse.data.gouv.fr/search/?q={addressEncoded}&limit={maxAddress}&autocomplete={Convert.ToInt32(autoCompletion)}"))
         {
             var response = await httpClient.SendAsync(request);
 

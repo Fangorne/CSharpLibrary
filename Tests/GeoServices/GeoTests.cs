@@ -1,5 +1,4 @@
-﻿using GeoCoordinatePortable;
-using Xunit;
+﻿using Xunit;
 
 namespace GeoServices;
 
