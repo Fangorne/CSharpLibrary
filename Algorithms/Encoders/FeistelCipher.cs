@@ -8,7 +8,7 @@ namespace Algorithms.Encoders;
 ///     In cryptography, a Feistel cipher (also known as Luby–Rackoff block cipher)
 ///     is a symmetric structure used in the construction of block ciphers,
 ///     named after the German-born physicist and cryptographer Horst Feistel
-///     who did pioneering research while working for IBM (USA)
+///     who did pioneering research while working for IBM (USA).
 ///     A large proportion of block ciphers use the scheme, including the US DES,
 ///     the Soviet/Russian GOST and the more recent Blowfish and Twofish ciphers.
 /// </summary>
